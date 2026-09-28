@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDgo.js — Next-Gen Data Notation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --heading: #f0f6fc;
+      --primary: #58a6ff;
+      --accent: #238636;
+      --code-bg: #090d12;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 1.5rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 0;
+    }
+
+    /* Header & Hero */
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(88, 166, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+    p.hero-subtitle {
+      font-size: 1.25rem;
+      color: #8b949e;
+      max-width: 650px;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* Creator Card */
+    .creator-box {
+      background: linear-gradient(135deg, #1f242d 0%, var(--card-bg) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .creator-info h3 {
+      color: var(--heading);
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .creator-info p {
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+    .tag {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Code Playground Section */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .card-header {
+      background: #21262d;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--heading);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    pre {
+      background: var(--code-bg);
+      padding: 1.2rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      color: #e6edf3;
+      overflow-x: auto;
+    }
+
+    /* Key Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .feature-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+    .feature-item h4 {
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .feature-item p {
+      font-size: 0.9rem;
+      color: #8b949e;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <header>
+      <div class="badge">v1.0.0 — Zero Setup Notation</div>
+      <h1>NDgo.js 🚀</h1>
+      <p class="hero-subtitle">Next Data Go — A human-friendly, quote-free, and lightweight data notation language for modern JavaScript runtime.</p>
+    </header>
+
+    <!-- Creator Spotlight -->
+    <div class="creator-box">
+      <div class="creator-info">
+        <h3>Designed & Created by Thwin (သွင်)</h3>
+        <p>Age 13 • Grade 6 Student & Markdowner</p>
+      </div>
+      <div class="tag">Apache 2.0 Licensed</div>
+    </div>
+
+    <!-- Quick Code Comparison -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span>NDgo Syntax (.ndgo)</span>
+          <span style="color: var(--primary);">Clean & Readable</span>
+        </div>
+        <pre><code># NDgo Configuration
+create group = School > Student
+set = Su Su, Aung Aung
+total = 200
+is active = yes
+created at = 2026-09-28</code></pre>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span>JavaScript Direct Parse</span>
+          <span style="color: #8b949e;">No Installation Needed</span>
+        </div>
+        <pre><code>// Online Import / Standalone Script
+const text = `...NDgo syntax...`;
+
+const data = NDgo.parse(text);
+console.log(data.School.Student);
+// Output: { members: [...], total: 200 }</code></pre>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <h2 style="color: var(--heading); margin-bottom: 1.5rem; font-size: 1.8rem;">Why NDgo?</h2>
+    <div class="features">
+      <div class="feature-item">
+        <h4>✨ Quote-Free Keys & Strings</h4>
+        <p>No double-quotes needed for keys or standard text values. Write naturally like writing on paper.</p>
+      </div>
+      <div class="feature-item">
+        <h4>⚡ Path Operators</h4>
+        <p>Declarative path syntax <code>create group = A > B</code> handles deep hierarchies without whitespace errors.</p>
+      </div>
+      <div class="feature-item">
+        <h4>📦 Zero Dependencies</h4>
+        <p>No <code>npm install</code> required. Import via CDN or drop <code>ndgo.js</code> straight into your HTML.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Licensed under the <b>Apache License 2.0</b> — Free for open-source and commercial use.</p>
+      <p style="margin-top: 0.5rem;">NDgo Project © 2026 Designed by <b>Thwin</b>.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
