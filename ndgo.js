@@ -1,4 +1,4 @@
-// ndgo.js - Zero Dependency, Pure JS NDgo Parser
+// ndgo.js - Zero Dependency, Pure JS NDgo Parser (v1.0.0)
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory);
@@ -10,6 +10,9 @@
 }(typeof self !== 'undefined' ? self : this, function () {
 
   class NDgo {
+    // Value အရေအတွက်အလိုက် အလိုအလျောက် Auto-Map လုပ်ပေးမည့် Default Field များ
+    static defaultFields = ['id', 'name', 'role', 'status'];
+
     static parse(text) {
       const result = {};
       const lines = text.split('\n');
@@ -35,14 +38,40 @@
         }
 
         if (line.startsWith('set =')) {
-          const values = line.split('=')[1].split(',').map(v => v.trim());
+          const values = line.split('=')[1].split(',').map(v => this._parseValue(v.trim()));
           this._setValue(result, currentGroupPath, 'members', values);
           continue;
         }
 
         if (line.includes('=')) {
-          const [key, val] = line.split('=').map(s => s.trim());
-          this._setValue(result, currentGroupPath, key, this._parseValue(val));
+          const eqIdx = line.indexOf('=');
+          const key = line.slice(0, eqIdx).trim();
+          const rawVal = line.slice(eqIdx + 1).trim();
+
+          if (key) {
+            // ၁။ Comma ပါဝင်ပါက အလိုအလျောက် Auto Fields Mapping (id, name, role...) ပြုလုပ်ခြင်း
+            if (rawVal.includes(',')) {
+              const values = rawVal.split(',').map(v => this._parseValue(v.trim()));
+              const autoObj = {};
+              
+              values.forEach((v, index) => {
+                const fieldName = this.defaultFields[index] || `field_${index + 1}`;
+                autoObj[fieldName] = v;
+              });
+
+              this._setValue(result, currentGroupPath, key, autoObj);
+            } 
+            // ၂။ Key = Value (ဥပမာ user = 6) ဆိုလျှင် { user: { id: 6 } } အဖြစ် Auto Map လုပ်ပေးခြင်း
+            else {
+              const parsedVal = this._parseValue(rawVal);
+
+              if (typeof parsedVal === 'number') {
+                this._setValue(result, currentGroupPath, key, { id: parsedVal });
+              } else {
+                this._setValue(result, currentGroupPath, key, parsedVal);
+              }
+            }
+          }
         }
       }
 
@@ -52,7 +81,7 @@
     static _parseValue(val) {
       if (val.toLowerCase() === 'yes' || val.toLowerCase() === 'true') return true;
       if (val.toLowerCase() === 'no' || val.toLowerCase() === 'false') return false;
-      if (!isNaN(val)) return Number(val);
+      if (val !== '' && !isNaN(val)) return Number(val);
       return val;
     }
 
